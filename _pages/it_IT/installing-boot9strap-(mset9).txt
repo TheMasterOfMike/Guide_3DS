@@ -1,12 +1,12 @@
 ---
-title: "Installing boot9strap (MSET9)"
+title: "Installazione di boot9strap (MSET9)"
 ---
 
 {% include toc title="Indice" %}
 
 {% capture technical_info %}
 <summary><em>Dettagli Tecnici (opzionale)</em></summary>
-[MSET9](https://github.com/zoogie/MSET9) is an exploit for the System Settings application developed by [zoogie](https://github.com/zoogie). It exploits a flaw where the ID1 (the second 32-character folder name inside of the Nintendo 3DS folder, inside of the ID0) can be *any* name as long as it is 32 characters. Performing a specific sequence of actions results in the console executing the instructions that are encoded into the ID1 folder name, which can be used to grant full control over the 3DS.
+[MSET9](https://github.com/zoogie/MSET9) è un exploit per l'applicazione "Impostazioni della console" sviluppata da [zoogie](https://github.com/zoogie). Sfrutta una falla per cui l'ID1 (la seconda cartella a 32 caratteri all'interno di Nintendo 3DS, all'interno di ID0) può essere *qualsiasi* nome a condizione che sia lungo 32 caratteri. L'esecuzione di una sequenza specifica di azioni determina nella console l'esecuzione delle istruzioni codificate nel nome della cartella ID1, che può essere utilizzato per garantire pieno controllo del 3DS.
 
 {% endcapture %}
 <details>{{ technical_info | markdownify }}</details>
@@ -14,110 +14,113 @@ title: "Installing boot9strap (MSET9)"
 
 ### Note di Compatibilità
 
-This method requires a computer running Windows or Linux. macOS is NOT supported, nor are phones or tablets. If you do not have access to Windows or Linux, you will need to use an [alternate exploit](alternate-exploits).
+Questo metodo richiede un computer che esegue Windows o Linux. macOS non è supportato, né lo sono telefoni o tablet. Se non hai accesso a un sistema Windows o Linux, è necessario utilizzare un [alternate exploit](alternate-exploits).
 {: .notice--warning}
 
 ### Cosa serve
 
-* The latest prerelease of [MSET9](https://github.com/zoogie/MSET9/releases) (the Release `.zip` file)
-* Any 3.x version of [Python](https://www.python.org/downloads/) **installed on your computer**
-    + If you are on Linux, you likely already have Python 3. Controlla aprendo un terminale e inserendo `python3 -V`. Se il comando restituisce un numero di versione, funzionerà per questa guida.
+* L'ultima versione di [MSET9](https://github.com/zoogie/MSET9/releases/latest) (il file Release `.zip`)
+* Qualsiasi versione 3.x di [Python](https://www.python.org/downloads/) **installata sul tuo computer**
+    + Se sei su Linux, probabilmente hai già Python 3. Controlla aprendo un terminale e inserendo `python3 -V`. Se il comando restituisce un numero di versione, funzionerà per questa guida.
 
 ### Istruzioni
 
 #### Sezione I - Preparazione
 
-In this section, you will prepare the SD card data necessary for the MSET9 exploit to trigger.
+In questa sezione preparerai i dati della scheda SD necessari per attivare l'exploit MSET9.
 
-1. Power on your console **with your SD card inserted**
-1. Open Mii Maker
-1. Wait for your console to reach the "Welcome to Mii Maker" screen, then exit Mii Maker
-    + You may see [this screen](/images/screenshots/mset9/mii-extdata.png), which indicates the necessary data has been created
-    + If you just reach the normal Mii Maker screen, exit Mii Maker and continue to the next step
+1. Accendi la console **con la scheda SD inserita**
+1. Avvia il Centro di creazione Mii
+1. Attendi che la console raggiunga la schermata "Benvenuto nel Centro di creazione Mii", quindi esci dall'applicazione
+    + Potresti vedere [questa schermata](/images/screenshots/mset9/mii-extdata.png), che indica che i dati necessari sono stati creati
+    + Se raggiungi la schermata principale del Centro di creazione Mii, esci dall'applicazione e continua al passo successivo
 1. Spegni la tua console
 1. Inserisci la scheda SD nel tuo computer
-1. Copy everything from the Release `.zip` to the root of your SD card, overwriting any existing files
+1. Copia tutto il contenuto dell'archivio Release `.zip` nella directory principale della tua scheda SD, sovrascrivendo tutti i file esistenti
 
     ![MSET9 root layout](/images/screenshots/mset9/mset9-root-layout.png)
     {: .notice--info}
 
-1. Execute the `mset9.py` script on the root of your SD card
-    + **Windows**: Double-click `mset9.bat`
-        + If this doesn't work: hold SHIFT and right-click anywhere in the SD card window, then click the option that opens Terminal, PowerShell, or Command Prompt, then type `py -3 mset9.py` and press Enter
-    + **Linux**: open a Terminal window, `cd` to the root of your SD card, then type `python3 mset9.py` and press Enter
-    + You should see a window that says "MSET9 ... SETUP by zoogie"
-    + You should keep this window open until the end of this page, but if you close it by accident, you can open it again by redoing this step
+1. Esegui lo script `mset9.py` nella directory principale della tua scheda SD
+    + **Windows**: Doppio click su `mset9.bat`
+        + Se non funziona: tieni premuto Maiusc e fai clic con il tasto destro del mouse in qualsiasi punto della finestra della scheda SD, quindi fai clic sull'opzione che apre il terminale, PowerShell o Prompt dei comandi, quindi digita `py -3 mset9. y` e premi Invio
+    + **Linux**: apri una finestra del terminale, `cd` nella directory principale della tua scheda SD, quindi digita `python3 mset9.py` e premi Invio
+    + Dovresti vedere una finestra con scritto "MSET9 ... SETUP by zoogie"
+    + Dovresti mantenere questa finestra aperta fino alla fine di questa pagina, ma se la chiudi inavvertitamente puoi riaprirla ripetendo questo passaggio
 
     ![Image: MSET9 setup](/images/screenshots/mset9/mset9-select.png)
     {: .notice--info}
 
-1. Type the number corresponding to your console model and version, then press Enter
-    + The window should change to this:
+1. Digita il numero corrispondente al modello di console e alla versione, quindi premi Invio
+    + La finestra dovrebbe cambiare in questo:
 
     ![Image: MSET9 setup](/images/screenshots/mset9/mset9-setup.png)
     {: .notice--info}
 
-    + Ensure that the correct console model and version is displayed
+    + Assicurarsi che siano visualizzati il modello di console e la versione corretti
 
-1. Type `1`, then press Enter to setup MSET9
-    + If you see "(title.db/import.db) does not exist on SD card!":
-        + Type "yes", then press Enter
-        + Close the MSET9 window
-        + Safely eject your SD from your computer
-        + Insert your SD card into your console
+1. Digita `1`, quindi premi Invio per configurare MSET9
+    + Se vedi "(title.db/import.db) does not exist on SD card!":
+        + Digita "yes", quindi premi Invio
+        + Chiudi la finestra di MSET9
+        + Rimuovi in modo sicuro la scheda SD dal computer
+        + Inserisci la scheda SD nella tua console
         + Accendi la tua console
-        + Navigate to System Settings -> Data Management -> Nintendo 3DS -> Software -> Reset ([visual instructions](/images/screenshots/database-reset.jpg))
+        + Entra in Impostazioni della console -> Gestione dati -> Nintendo 3DS -> Software -> Reset ([istruzioni visive](/images/screenshots/database-reset.jpg))
         + Spegni la tua console
-        + Insert your SD card into your computer
-        + Go back to Step 7 ("Execute the `mset9.py` script")
-1. Once the window says "Setting up... done", safely eject your SD card from your computer
-    + Keep the MSET9 window open
+        + Inserisci la scheda SD nel tuo computer
+        + Torna al Passo 7 ("Esegui lo script `mset9.py`")
+1. Quando appare il messaggio "Setting up... done", rimuovi in maniera sicura la tua scheda SD dal computer
+    + Mantieni aperta la finestra di MSET9
 1. Reinserisci la scheda SD nella tua console
 1. Accendi la tua console
 
-#### Section II - MSET9
+#### Sezione II - MSET9
 
-In this section, you will trigger MSET9 to launch SafeB9SInstaller (the custom firmware installer).
+In questa sezione attiverai MSET9 per avviare SafeB9SInstaller (l'installer del custom firmware).
 
-These instructions must be followed **EXACTLY**, so double-check EVERYTHING you are doing to avoid errors!
+Queste istruzioni vanno eseguite **ALLA LETTERA**, quindi ricontrolla TUTTO quello che farai per evitare errori!
 {: .notice--danger}
 
-1. **[Hover over](/images/screenshots/mset9/hover-settings.png)** the System Settings icon using the D-Pad (do not select it yet)
-1. Power off, then power on your console
-1. Press (A) to launch System Settings
-1. Navigate to `Data Management` -> `Nintendo 3DS` -> `Extra Data` ([image](/images/screenshots/mset9/settings-extdata.png))
-1. **Do not press any buttons or touch the screen** - ensure that you see the Mii Maker icon
-1. **With the console STILL ON, and without pressing any buttons or touching the screen**, remove your SD card from your console
-    + The menu will refresh and say that no SD card is inserted, which is expected
-1. Inserisci la scheda SD nel tuo computer
-1. In the MSET9 window, type `2`, then press Enter to trigger MSET9
-    + You should see "Injecting... done."
-1. Safely eject your SD card from your computer
-    + Keep the MSET9 window open
-1. Reinsert your SD card into your console **without pressing any buttons or touching the screen**
+1. **[Passa sopra](/images/screenshots/mset9/hover-settings.png)** l'icona di "Impostazioni della console" con il D-Pad (senza selezionarlo)
+1. Spegni, quindi riaccendi la tua console
+1. Premi (A) per avviare le Impostazioni della console
+1. Entra in `Gestione dati` -> `Nintendo 3DS` -> `Dati aggiuntivi` ([immagine](/images/screenshots/bb3/settings-extdata.png))
+1. **Non premere alcun pulsante o toccare lo schermo** - assicurati di vedere l'icona del Centro di creazione Mii
+1. **Con la console ANCORA ACCESA e senza premere alcun pulsante o toccare lo schermo**, rimuovi la tua scheda SD dalla console
+    + Il menu si aggiornerà e dirà che non è presente alcuna scheda SD, il che è normale
+1. Insert your SD card into your computer, then wait a few seconds
+1. Nella finestra di MSET9, premi `2`, quindi premi Invio per attivare MSET9
+    + Dovresti vedere "Injecting... done."
+1. Rimuovi in modo sicuro la tua scheda SD dal computer
+    + Mantieni aperta la finestra di MSET9
+1. Reinserisci la scheda SD nella console **senza premere alcun pulsante o toccare lo schermo**
 1. Se l'exploit è andato a buon fine, si avvierà SafeB9SInstaller 
-    + If you get a red screen, follow the [troubleshooting guide](troubleshooting#installing-boot9strap-mset9)
+    + Se ottieni una schermata rossa, segui la [guida per risolvere i problemi](troubleshooting#installing-boot9strap-mset9)
 
 #### Sezione III - Installazione di boot9strap
 
 {% include_relative include/install-boot9strap-safeb9sinstaller.txt %}
 {%- include_relative include/configure-luma3ds.txt %}
 
-#### Section IV - Uninstalling MSET9
+#### Section IV - Removing MSET9
 
-In this section, you will remove MSET9 to prevent further issues. (This will not remove the custom firmware that you just installed.)
+In questa sezione rimuoverai MSET9 per evitare problemi successivi. (Questo non rimuoverà il custom firmware che hai appena installato.)
 
-Do NOT skip this section! If you do, applications may crash unexpectedly and you may encounter errors on the next page!
+NON saltare questa sezione! Se lo fai, le applicazioni potrebbero inaspettatamente crashare e potresti riscontrare errori nella pagina successiva!
 {: .notice--danger}
 
 1. Spegni la tua console
-1. Inserisci la scheda SD nel tuo computer
-1. In the MSET9 window, type `4`, then press Enter to remove MSET9
-    + You should see "Removing... done"
-1. Close the MSET9 window; you will not need it for any of the upcoming steps
+1. Insert your SD card into your computer, then wait a few seconds
+1. Nella finestra di MSET9, premi `4`, quindi premi Invio per rimuovere MSET9
+    + Dovresti vedere "Removing... done"
+1. Chiudi la finestra di MSET9, non ne avrai più bisogno nei passi successivi
 
 {% include_relative include/luma3ds-installed-note.txt %}
 ___
+
+Did you follow Section IV (Removing MSET9)? That section is MANDATORY!
+{: .notice--danger}
 
 ### Prosegui con il [Completamento dell'installazione](finalizing-setup)
 {: .notice--primary}
